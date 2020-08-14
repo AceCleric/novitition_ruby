@@ -1,0 +1,17 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  username: root
+  socket: /tmp/mysql.sock
+
+development: &development
+  <<: *default
+  database: notivition_development
+
+test: &test
+  <<: *default
+  database: notivition_test
+
+production: &production
+  <<: *default
+  database: notivition_production

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @prediction.team_id %>
+</p>
+
+<p>
+  <strong>Will win:</strong>
+  <%= @prediction.will_win %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @prediction.user_id %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @prediction.points %>
+</p>
+
+<%= link_to 'Edit', edit_prediction_path(@prediction) %> |
+<%= link_to 'Back', predictions_path %>

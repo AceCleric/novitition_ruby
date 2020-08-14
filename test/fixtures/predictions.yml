@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team: one
+  will_win: false
+  user_id: MyString
+  points: 1
+
+two:
+  team: two
+  will_win: false
+  user_id: MyString
+  points: 1

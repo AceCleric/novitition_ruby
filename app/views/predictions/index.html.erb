@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Predictions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Will win</th>
+      <th>User</th>
+      <th>Points</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @predictions.each do |prediction| %>
+      <tr>
+        <td><%= prediction.team_id %></td>
+        <td><%= prediction.will_win %></td>
+        <td><%= prediction.user_id %></td>
+        <td><%= prediction.points %></td>
+        <td><%= link_to 'Show', prediction %></td>
+        <td><%= link_to 'Edit', edit_prediction_path(prediction) %></td>
+        <td><%= link_to 'Destroy', prediction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Prediction', new_prediction_path %>

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_team: MyString
+  second_team: MyString
+  match_date: 2020-08-14
+  location: MyString
+  score_first_team: 1
+  score_second_team: 1
+
+two:
+  first_team: MyString
+  second_team: MyString
+  match_date: 2020-08-14
+  location: MyString
+  score_first_team: 1
+  score_second_team: 1
