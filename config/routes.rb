@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
-  root 'users#index'
+  root 'dashboard#index'
 
   resources :wallets
   resources :predictions
@@ -10,5 +10,10 @@ Rails.application.routes.draw do
   resources :competitions
   resources :sports
   resources :users
+
+  resources :sessions, only: [:new, :create, :destroy]
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
