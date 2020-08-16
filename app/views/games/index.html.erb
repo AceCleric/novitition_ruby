@@ -18,8 +18,8 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= game.first_team %></td>
-        <td><%= game.second_team %></td>
+        <td><%= game.first_team.name %></td>
+        <td><%= game.second_team.name %></td>
         <td><%= game.match_date %></td>
         <td><%= game.location %></td>
         <td><%= game.score_first_team %></td>

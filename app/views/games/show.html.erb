@@ -2,12 +2,12 @@
 
 <p>
   <strong>First team:</strong>
-  <%= @game.first_team %>
+  <%= @game.first_team.name %>
 </p>
 
 <p>
   <strong>Second team:</strong>
-  <%= @game.second_team %>
+  <%= @game.second_team.name%>
 </p>
 
 <p>
@@ -32,3 +32,4 @@
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
+<%= link_to 'Make a prediction', new_game_prediction_path(@game) %>

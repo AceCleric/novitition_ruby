@@ -2,5 +2,5 @@
 
 <%= render 'form', prediction: @prediction %>
 
-<%= link_to 'Show', @prediction %> |
-<%= link_to 'Back', predictions_path %>
+<%= link_to 'Show', game_prediction_path(@game, @prediction) %> |
+<%= link_to 'Back', game_predictions_path(@game) %>

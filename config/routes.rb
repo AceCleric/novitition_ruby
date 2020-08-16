@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   resources :wallets
-  resources :predictions
-  resources :games
+  
+  resources :games do
+    resources :predictions
+  end
+
+  resources :predictions, only: %i[index]
+
   resources :teams
   resources :competitions
   resources :sports

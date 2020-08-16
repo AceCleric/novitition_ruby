@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_120151) do
+ActiveRecord::Schema.define(version: 2020_08_16_111611) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -34,14 +34,15 @@ ActiveRecord::Schema.define(version: 2020_08_14_120151) do
   end
 
   create_table "games", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "first_team"
-    t.string "second_team"
+    t.string "second_team_id"
     t.date "match_date"
     t.string "location"
     t.integer "score_first_team"
     t.integer "score_second_team"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_team_id"
+    t.index ["first_team_id"], name: "index_games_on_first_team_id"
   end
 
   create_table "predictions", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_120151) do
     t.integer "points"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "game_id"
   end
 
   create_table "sports", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

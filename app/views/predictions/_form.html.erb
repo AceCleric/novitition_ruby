@@ -1,37 +1,23 @@
-<%= form_with(model: prediction, local: true) do |form| %>
-  <% if prediction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(prediction.errors.count, "error") %> prohibited this prediction from being saved:</h2>
+<%= simple_form_for([@game, @prediction]) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <ul>
-        <% prediction.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :team_id %>
-    <%= form.text_field :team_id %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.association :team, collection: @playing_teams.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
   </div>
 
-  <div class="field">
-    <%= form.label :will_win %>
-    <%= form.check_box :will_win %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :will_win %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :points %>
   </div>
 
-  <div class="field">
-    <%= form.label :points %>
-    <%= form.number_field :points %>
-  </div>
+  <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+  <%= f.input :game_id, as: :hidden, input_html: { value: @game.id } %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

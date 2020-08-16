@@ -1,22 +1,12 @@
-<%= form_with(model: sport, local: true) do |form| %>
-  <% if sport.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(sport.errors.count, "error") %> prohibited this sport from being saved:</h2>
+<%= simple_form_for(@sport) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <ul>
-        <% sport.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :name %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

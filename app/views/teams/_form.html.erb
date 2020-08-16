@@ -1,32 +1,20 @@
-<%= form_with(model: team, local: true) do |form| %>
-  <% if team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+<%= simple_form_for(@team) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <ul>
-        <% team.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.association :competition, collection: Competition.all.map{ |competition| [competition.name, competition.id, {name: competition.name.downcase}] } %>
   </div>
 
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :competition_id %>
-    <%= form.text_field :competition_id %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :country, as: :string %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

@@ -1,47 +1,32 @@
-<%= form_with(model: game, local: true) do |form| %>
-  <% if game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+<%= simple_form_for(@game) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <ul>
-        <% game.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :first_team %>
-    <%= form.text_field :first_team %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.association :first_team, collection: Team.all.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
   </div>
 
-  <div class="field">
-    <%= form.label :second_team %>
-    <%= form.text_field :second_team %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.association :second_team, collection: Team.all.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
   </div>
 
-  <div class="field">
-    <%= form.label :match_date %>
-    <%= form.date_select :match_date %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :match_date %>
   </div>
 
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :location %>
   </div>
 
-  <div class="field">
-    <%= form.label :score_first_team %>
-    <%= form.number_field :score_first_team %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :score_first_team, disabled: @disable_score_fields %>
   </div>
 
-  <div class="field">
-    <%= form.label :score_second_team %>
-    <%= form.number_field :score_second_team %>
+  <div class="form-inputs" style="margin-left: 2em;">
+    <%= f.input :score_second_team, disabled: @disable_score_fields %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

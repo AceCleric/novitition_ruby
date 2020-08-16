@@ -20,9 +20,9 @@
         <td><%= prediction.will_win %></td>
         <td><%= prediction.user_id %></td>
         <td><%= prediction.points %></td>
-        <td><%= link_to 'Show', prediction %></td>
-        <td><%= link_to 'Edit', edit_prediction_path(prediction) %></td>
-        <td><%= link_to 'Destroy', prediction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', game_prediction_path(@game, prediction) %></td>
+        <td><%= link_to 'Edit', edit_game_prediction_path(@game, prediction) %></td>
+        <td><%= link_to 'Destroy', [@game, prediction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Prediction', new_prediction_path %>
+<%= link_to 'New Prediction', new_game_prediction_path(@game) %>
