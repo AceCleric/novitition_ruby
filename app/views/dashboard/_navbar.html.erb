@@ -9,20 +9,26 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <% if current_user %>
-            <li class="nav-item active">
+            <li class="nav-item <%= 'active' if @page_tab == "home" %>">
               <%= link_to 'Home', root_path, class: "nav-link" %>
             </li>
-            <li class="nav-item">
-              <%= link_to 'Predictions', users_path, class: "nav-link" %>
+            <li class="nav-item <%= 'active' if @page_tab == "games" %>">
+              <%= link_to 'Games', games_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item <%= 'active' if @page_tab == "sports" %>">
+              <%= link_to 'Sports', sports_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item <%= 'active' if @page_tab == "predictions" %>">
+              <%= link_to 'My predictions', user_predictions_path(current_user, only_user: true), class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "Log Out", logout_path, class: "nav-link", data: {confirm: "Are you sure you want to logout?"} %>
             </li>
           <% else %>
-            <li class="nav-item">
+            <li class="nav-item  <%= 'active' if @page_tab == "login" %>">
               <%= link_to 'Login', login_path, class: "nav-link" %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item  <%= 'active' if @page_tab == "signup" %>">
               <%= link_to "Sign up", signup_path, class: "nav-link" %>
             </li>
           <% end %>

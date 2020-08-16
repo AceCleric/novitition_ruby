@@ -14,7 +14,9 @@
       <%= render 'dashboard/navbar' %>
     </header>
     <div class="container-fluid page">
-     <%= yield %>
+      <div class='<%= controller.controller_name %>'>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

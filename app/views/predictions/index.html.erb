@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if @only_show_user_predictions %>
+  <% tab "predictions" %>
+<% end %>
 
 <h1>Predictions</h1>
 
@@ -16,13 +18,15 @@
   <tbody>
     <% @predictions.each do |prediction| %>
       <tr>
-        <td><%= prediction.team_id %></td>
-        <td><%= prediction.will_win %></td>
-        <td><%= prediction.user_id %></td>
+        <td><%= prediction.team.name %></td>
+        <td><%= prediction.will_win ? "Win" : "Lose" %></td>
+        <td><%= prediction.user.first_name %></td>
         <td><%= prediction.points %></td>
-        <td><%= link_to 'Show', game_prediction_path(@game, prediction) %></td>
-        <td><%= link_to 'Edit', edit_game_prediction_path(@game, prediction) %></td>
-        <td><%= link_to 'Destroy', [@game, prediction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless @only_show_user_predictions %>
+          <td><%= link_to 'Show', game_prediction_path(@game, prediction) %></td>
+          <td><%= link_to 'Edit', edit_game_prediction_path(@game, prediction) %></td>
+          <td><%= link_to 'Destroy', [@game, prediction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Prediction', new_game_prediction_path(@game) %>
+<% unless @only_show_user_predictions %>
+  <%= link_to 'New Prediction', new_game_prediction_path(@game) %>
+<% end %>

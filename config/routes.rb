@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :predictions
   end
 
-  resources :predictions, only: %i[index]
+  resources :user do
+    resources :predictions
+  end
 
   resources :teams
   resources :competitions

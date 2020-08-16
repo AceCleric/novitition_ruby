@@ -1,11 +1,16 @@
 class PredictionsController < ApplicationController
   before_action :set_prediction, only: %i[show edit update destroy]
   before_action :set_game
-  # before_action :set_playing_teams, only: %i[edit update new create]
   before_action :check_user_login
 
   def index
-    @predictions = Prediction.all
+    @only_show_user_predictions = show_user_predictions?
+    
+    if @only_show_user_predictions
+      @predictions = current_user.predictions
+    else
+      @predictions = Prediction.all
+    end
   end
 
   def show
@@ -60,6 +65,7 @@ class PredictionsController < ApplicationController
   end
 
   def set_game
+    return if show_user_predictions?
     @game = Game.find(params[:game_id])
     @playing_teams = [@game.first_team, @game.second_team]
   end
@@ -70,5 +76,9 @@ class PredictionsController < ApplicationController
   
   def prediction_params
     params.require(:prediction).permit(:team_id, :will_win, :points, :game_id, :user_id)
+  end
+
+  def show_user_predictions?
+    params[:only_user] == "true"
   end
 end
