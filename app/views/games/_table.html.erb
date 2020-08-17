@@ -1,0 +1,26 @@
+<table
+  class="table-striped table-dark"
+  data-toggle="table" 
+  data-buttons-class="primary">
+  <thead>
+    <tr class="tr-class-1">
+      <th colspan="4">Upcoming Games</th>
+    </tr>
+    <tr class="tr-class-2">
+      <th data-field="team1">Team1</th>
+      <th data-field="team2">Team2</th>
+      <th data-field="location">Location</th>
+      <th data-field="match_date">Match date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% upcoming_games.map do |game| %>
+      <tr id="tr-id-1" class="tr-class-1">
+        <td data-value="team1"><%= game.first_team.name %></td>
+        <td data-text="team2"><%= game.second_team.name %></td>
+        <td data-i18n="location"><%= game.location %></td>
+        <td data-i18n="match_date"><%= format_to_date(game.match_date) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,24 @@
+<table
+  class="table-striped table-dark"
+  data-toggle="table" 
+  data-buttons-class="primary">
+  <thead>
+    <tr class="tr-class-1">
+      <th colspan="3">Teams</th>
+    </tr>
+    <tr class="tr-class-2">
+      <th data-field="name">Name</th>
+      <th data-field="country">Country</th>
+      <th data-field="competition">Competition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% teams.map do |team| %>
+      <tr id="tr-id-1" class="tr-class-1">
+        <td data-value="name"><%= team.name %></td>
+        <td data-text="country"><%= team.country  %></td>
+        <td data-i18n="competition"><%= team.competition.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

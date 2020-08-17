@@ -24,6 +24,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap', '~> 4.0.0'
 
+gem "bootstrap-table-rails"
+
 gem 'simple_form'
 
 gem 'jquery-rails'

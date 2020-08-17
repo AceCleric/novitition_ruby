@@ -5,4 +5,6 @@ class Game < ApplicationRecord
   belongs_to :second_team, class_name: "Team"
 
   has_many :predictions
+
+  scope :upcoming, -> { where("games.match_date >=  ?", Time.zone.now ) }
 end

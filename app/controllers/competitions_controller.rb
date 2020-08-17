@@ -61,7 +61,7 @@ class CompetitionsController < ApplicationController
   end
   
   def competition_params
-    params.require(:competition).permit(:name, :sport_id)
+    params.require(:competition).permit(:name, :sport_id, :nationality)
   end
 end
 
