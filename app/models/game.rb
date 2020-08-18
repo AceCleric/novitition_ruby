@@ -6,5 +6,7 @@ class Game < ApplicationRecord
 
   has_many :predictions
 
+  scope :past,  -> { where("games.match_date <  ?", Time.zone.now ) }
+  scope :today, -> { where("games.match_date BETWEEN ? AND  ?", Time.zone.now.beginning_of_day, Time.zone.now.end_of_day) }
   scope :upcoming, -> { where("games.match_date >=  ?", Time.zone.now ) }
 end

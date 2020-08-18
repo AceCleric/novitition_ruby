@@ -1,37 +1,31 @@
 <% tab "games" %>
+<div class="tennis_field_image">
+  <h1 class="text-center pt-3">Games</h1>
 
-<h1>Games</h1>
+  <div class="row top-buffer pb-5">
+    <div class="col d-flex justify-content-center">
+      <div class="container">
+        <%= render "games/table", games: @todays_games, title: "Todays games" %>
+        <div class="col-md-12 text-center pt-3">
+          <button type="button" class="btn btn-secondary">Make a prediction</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>First team</th>
-      <th>Second team</th>
-      <th>Match date</th>
-      <th>Location</th>
-      <th>Score first team</th>
-      <th>Score second team</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row top-buffer pb-5">
+    <div class="col d-flex justify-content-center">
+      <div class="container">
+        <%= render "games/table", games: @past_games, title: "Past games" %>
+      </div>
+    </div>
+  </div>
 
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= game.first_team.name %></td>
-        <td><%= game.second_team.name %></td>
-        <td><%= game.match_date %></td>
-        <td><%= game.location %></td>
-        <td><%= game.score_first_team %></td>
-        <td><%= game.score_second_team %></td>
-        <td><%= link_to 'Show', game %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Game', new_game_path %>
+  <div class="row top-buffer pb-5">
+    <div class="col d-flex justify-content-center">
+      <div class="container">
+        <%= render "games/table", games: @upcoming_games, title: "Upcoming games" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
   data-buttons-class="primary">
   <thead>
     <tr class="tr-class-1">
-      <th colspan="4">Upcoming Games</th>
+      <th class="text-center" colspan="4"><%= title %></th>
     </tr>
     <tr class="tr-class-2">
       <th data-field="team1">Team1</th>
@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <% upcoming_games.map do |game| %>
+    <% games.map do |game| %>
       <tr id="tr-id-1" class="tr-class-1">
         <td data-value="team1"><%= game.first_team.name %></td>
         <td data-text="team2"><%= game.second_team.name %></td>

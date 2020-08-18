@@ -10,26 +10,26 @@
         <ul class="navbar-nav ml-auto">
           <% if current_user %>
             <li class="nav-item <%= 'active' if @page_tab == "home" %>">
-              <%= link_to 'Home', root_path, class: "nav-link" %>
+              <%= link_to 'Home', root_url, class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item <%= 'active' if @page_tab == "games" %>">
-              <%= link_to 'Games', games_path, class: "nav-link" %>
+              <%= link_to 'Games', games_path, class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item <%= 'active' if @page_tab == "sports" %>">
-              <%= link_to 'Sports', sports_path, class: "nav-link" %>
+              <%= link_to 'Sports', sports_path, class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item <%= 'active' if @page_tab == "predictions" %>">
-              <%= link_to 'My predictions', user_predictions_path(current_user, only_user: true), class: "nav-link" %>
+              <%= link_to 'My predictions', user_predictions_path(current_user, only_user: true), class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item">
               <%= link_to "Log Out", logout_path, class: "nav-link", data: {confirm: "Are you sure you want to logout?"} %>
             </li>
           <% else %>
             <li class="nav-item  <%= 'active' if @page_tab == "login" %>">
-              <%= link_to 'Login', login_path, class: "nav-link" %>
+              <%= link_to 'Login', login_path, class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item  <%= 'active' if @page_tab == "signup" %>">
-              <%= link_to "Sign up", signup_path, class: "nav-link" %>
+              <%= link_to "Sign up", signup_path, class: "nav-link", data: { turbolinks: false }  %>
             </li>
           <% end %>
         </ul>

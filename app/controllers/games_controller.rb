@@ -3,7 +3,9 @@ class GamesController < ApplicationController
   before_action :check_user_login
 
   def index
-    @games = Game.all
+    @past_games = Game.past
+    @todays_games = Game.today
+    @upcoming_games = Game.upcoming
   end
 
   def show

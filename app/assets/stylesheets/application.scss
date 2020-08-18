@@ -24,5 +24,44 @@
 }
 .page {
   padding: 0;
+  line-height: 4.4vh;
+}
 
+.soccer_field_image {
+  color: white;
+  background-image: 
+  linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),url("soccer_field.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50%;
+}
+
+.basketball_field_image {
+  color: white;
+  background-image: 
+  linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),url("basketball_field.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50%;
+}
+
+.tennis_field_image {
+  color: white;
+  background-image: 
+  linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),url("tennis_field.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height:  50%;
 }
