@@ -1,39 +1,19 @@
-<% if @only_show_user_predictions %>
-  <% tab "predictions" %>
-<% end %>
+<% tab "predictions" %>
 
-<h1>Predictions</h1>
+<div class="tennis_field_image">
+  
+  <div class="row pb-5 pt-4">
+    <div class="col d-flex justify-content-center">
+      <div class="container">
+        <%= render "table", predictions: @won_predictions, title: "Won predictions" %>
+        <%= render "table", predictions: @lost_predictions, title: "Lost predictions" %>
+        <div class="col-md-12 text-center pt-3">
+          <!-- <%= link_to "claim prediction prize", new_prediction_path, class: "btn btn-secondary", data: { turbolinks: false } %> -->
+        </div>
+      </div>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Team</th>
-      <th>Will win</th>
-      <th>User</th>
-      <th>Points</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  </div>
+</div>
 
-  <tbody>
-    <% @predictions.each do |prediction| %>
-      <tr>
-        <td><%= prediction.team.name %></td>
-        <td><%= prediction.will_win ? "Win" : "Lose" %></td>
-        <td><%= prediction.user.first_name %></td>
-        <td><%= prediction.points %></td>
-        <% unless @only_show_user_predictions %>
-          <td><%= link_to 'Show', game_prediction_path(@game, prediction) %></td>
-          <td><%= link_to 'Edit', edit_game_prediction_path(@game, prediction) %></td>
-          <td><%= link_to 'Destroy', [@game, prediction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<% unless @only_show_user_predictions %>
-  <%= link_to 'New Prediction', new_game_prediction_path(@game) %>
-<% end %>

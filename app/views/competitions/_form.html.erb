@@ -1,20 +1,27 @@
-<%= simple_form_for(@competition) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.association :sport, collection: Sport.all.map{ |sport| [sport.name, sport.id, {name: sport.name.downcase}] } %>
+<%= simple_form_for @competition do |f| %>
+  <div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label">Sport</label>
+    <div class="col-lg-9">
+      <%= f.select :sport, options_for_select(Sport.all.map{ |sport| [sport.name, sport.id, {name: sport.name.downcase}]}), {}, {class: "form-control"} %>
+    </div>
   </div>
-
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :name %>
+<div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label">Name</label>
+    <div class="col-lg-9">
+      <%= f.text_field :name, required: true, class: "form-control"  %> 
+    </div>
   </div>
-
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :nationality %>
+  <div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label">Nationality</label>
+    <div class="col-lg-9">
+      <%= f.text_field :nationality, required: true, class: "form-control"  %> 
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label"></label>
+    <div class="col-lg-9">
+      <%= f.submit "Submit", class: "btn btn-primary"  %> 
+      <%= link_to 'Add sport', new_sport_path, class: "btn btn-secondary", data: { turbolinks: false } %>
+    </div>
   </div>
 <% end %>

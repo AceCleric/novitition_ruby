@@ -1,0 +1,30 @@
+<table
+  class="table-striped table-dark"
+  data-toggle="table" 
+  data-buttons-class="primary">
+  <thead>
+    <tr class="tr-class-1">
+      <th class="text-center" colspan="5"><%= title %></th>
+    </tr>
+    <tr class="tr-class-2">
+      <th data-field="predicted_team">predicted team</th>
+      <th data-field="will_win">Will win?</th>
+      <th data-field="points">Points inserted</th>
+      <th data-field="game">Game</th>
+      <th data-field="date">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% unless predictions.blank? %>
+    <% predictions.each do |prediction| %>
+        <tr id="tr-id-1" class="tr-class-1">
+          <td data-value="predicted_team"><%= prediction.team.name %></td>
+          <td data-text="will_win"><%= prediction.will_win %></td>
+          <td data-value="points"><%= prediction.points %></td>
+          <td data-i18n="game"><%= prediction.game.first_team.name %> vs <%= prediction.game.second_team.name %></td>
+          <td data-value="date"><%= format_to_date(prediction.game.match_date) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

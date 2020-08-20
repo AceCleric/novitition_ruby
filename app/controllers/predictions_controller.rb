@@ -8,6 +8,13 @@ class PredictionsController < ApplicationController
     
     if @only_show_user_predictions
       @predictions = current_user.predictions
+
+      # getting the predictions which have won
+      won_predictions_with_nil = @predictions.map(&:passed?)
+      @won_predictions = won_predictions_with_nil.compact
+      
+      # remove nil items from array
+      @lost_predications = @predictions - @won_predictions
     else
       @predictions = Prediction.all
     end

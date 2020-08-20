@@ -9,4 +9,16 @@ class Game < ApplicationRecord
   scope :past,  -> { where("games.match_date <  ?", Time.zone.now ) }
   scope :today, -> { where("games.match_date BETWEEN ? AND  ?", Time.zone.now.beginning_of_day, Time.zone.now.end_of_day) }
   scope :upcoming, -> { where("games.match_date >=  ?", Time.zone.now ) }
+
+  def result
+    return unless match_date < Time.zone.now && score_first_team.present? && score_second_team.present?
+
+    if score_first_team > score_second_team
+      return first_team
+    elsif score_second_team > score_first_team
+      return second_team
+    else
+      return {result: "draw"}
+    end
+  end
 end

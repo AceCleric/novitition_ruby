@@ -1,23 +1,79 @@
+<style>
+  a.active.nav-link{
+    background-color: #C5AA6A!important;
+    }
+  
+  a.nav-link {
+    color: white!important;
+  }
+</style>
+
 <% tab "login" %>
 <div class="field_image">
   <div  class="row justify-content-center align-items-center h-50">
-    <div class="col-md-2">
-        <div class="col-md-12">
-          <%= simple_form_for :sessions, url: sessions_path, html: {id: "login-form", class: "form"} do |f| %>
-            <h3 class="text-center text-light">Login</h3>
-            <div class="form-group">
-              <%= f.label :email, required: false, class: "text-light" %>
-              <%= f.text_field :email, placeholder: 'Email Address', class: "form-control" %>
+    <div class="col-md-4">
+      <div class="col-md-12">
+        <div class="card bg-dark mt-4">
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="login_tab" href="#login" data-toggle="tab" role="tab" aria-controls="login_tab" aria-selected="true">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="signup_tab" href="#signup" data-toggle="tab" role="tab" aria-controls="signup_tab" aria-selected="false">Signup</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content mt-3" id="myTabContent">
+              <div class="tab-pane fade show active"  id="login" role="tabpanel" aria-labelledby="login_tab">
+                <%= simple_form_for :sessions, url: sessions_path, html: {id: "login-form", class: "form"} do |f| %>
+                  <h3 class="text-center text-light">Login</h3>
+                  <div class="form-group">
+                    <%= f.label :email, required: false, class: "text-light" %>
+                    <%= f.text_field :email, placeholder: 'Email Address', class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :password, required: false, class: "text-light" %>
+                    <%= f.password_field :password, placeholder: 'Password', class: "form-control" %>
+                  </div>
+                  <div class="form-group text-center">
+                    <%= f.submit "Login", class: "btn btn-secondary btn-sm" %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup_tab">
+                <%= simple_form_for :users, url: users_path, html: {id: "signup-form", class: "form"} do |f| %>
+                  <h3 class="text-center text-light">Signup</h3>
+                  <div class="form-group">
+                    <%= f.input :first_name, required: true %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.input :last_name, required: true %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.input :email, required: true %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.input :password, required: true %>
+                  </div>
+                  
+                  <div class="form-group">
+                    <%= f.input :password_confirmation, required: true %>
+                  </div>
+                  
+                  <div class="form-group text-center">
+                    <%= f.submit "Signup", class: "btn btn-secondary btn-sm" %>
+                  </div>
+                <% end %>
+              </div>
             </div>
-            <div class="form-group">
-              <%= f.label :password, required: false, class: "text-light" %>
-              <%= f.password_field :password, placeholder: 'Password', class: "form-control" %>
-            </div>
-            <div class="form-group text-center">
-              <%= f.submit "Login", class: "btn btn-secondary btn-sm" %>
-            </div>
-          <% end %>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </div>

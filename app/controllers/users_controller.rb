@@ -23,10 +23,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         Wallet.create(credit: 20, user_id: @user.id)
-        format.html { redirect_to user_path(@user.id), notice: 'User aangemaakt.' }
+        format.html { redirect_to root_path, notice: 'User created, please login.' }
         format.json { render :show, status: :created, location: @sport }
       else
-        format.html { render :new }
+        format.html { 
+          redirect_to root_path(show_signup: true), notice: 'Failed creating a user'
+        }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -35,10 +37,12 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_path(@user.id), notice: 'User bewerkt.' }
+        format.html { redirect_to profile_path(current_user.id), notice: 'Updated user.' }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit }
+        format.html { 
+          redirect_to profile_path(current_user.id), notice: 'Failed updating a user'
+        }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +68,7 @@ class UsersController < ApplicationController
   
  
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:users).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 end
 

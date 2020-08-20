@@ -14,7 +14,8 @@
       <%= render 'dashboard/navbar' %>
     </header>
     <div class="container-fluid page">
-      <div class='<%= controller.controller_name %>'>
+      <div class='<%= controller.controller_name %>'> 
+        <%= render 'layouts/flash_messages' %>
         <%= yield %>
       </div>
     </div>

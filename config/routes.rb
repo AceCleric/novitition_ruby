@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :competitions
   resources :sports
   resources :users
+  get 'profile/:id', to: 'users#show', as: 'profile'
+  patch 'profile/:id', to: 'user#update'
 
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'

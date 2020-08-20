@@ -15,11 +15,14 @@
             <li class="nav-item <%= 'active' if @page_tab == "games" %>">
               <%= link_to 'Games', games_path, class: "nav-link", data: { turbolinks: false } %>
             </li>
-            <li class="nav-item <%= 'active' if @page_tab == "sports" %>">
-              <%= link_to 'Sports', sports_path, class: "nav-link", data: { turbolinks: false } %>
+            <li class="nav-item <%= 'active' if @page_tab == "competitions" %>">
+              <%= link_to 'Competitions', competitions_path, class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item <%= 'active' if @page_tab == "predictions" %>">
               <%= link_to 'My predictions', user_predictions_path(current_user, only_user: true), class: "nav-link", data: { turbolinks: false } %>
+            </li>
+            <li class="nav-item <%= 'active' if @page_tab == "user" %>">
+              <%= link_to 'User', profile_path(current_user.id), class: "nav-link", data: { turbolinks: false } %>
             </li>
             <li class="nav-item">
               <%= link_to "Log Out", logout_path, class: "nav-link", data: {confirm: "Are you sure you want to logout?"} %>

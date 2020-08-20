@@ -1,22 +1,26 @@
 <%= simple_form_for(@sport) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :name %>
+<div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label">Name</label>
+    <div class="col-lg-9">
+      <%= f.text_field :name, required: true, class: "form-control"  %> 
+    </div>
   </div>
-
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :description %>
+  <div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label">Description</label>
+    <div class="col-lg-9">
+      <%= f.text_field :description, required: true, class: "form-control"  %> 
+    </div>
   </div>
-
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.label "sport_image" %>
-    <%= f.file_field :image %>
+  <div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label">Sport image</label>
+    <div class="col-lg-9">
+      <%= f.file_field :image, class: "form-control"  %> 
+    </div>
   </div>
-
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group row">
+    <label class="col-lg-3 col-form-label form-control-label"></label>
+    <div class="col-lg-9">
+      <%= f.submit "Submit", class: "btn btn-primary"  %> 
+    </div>
   </div>
 <% end %>

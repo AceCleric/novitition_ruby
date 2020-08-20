@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_211158) do
+ActiveRecord::Schema.define(version: 2020_08_19_212713) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_211158) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_team_id"
+    t.float "prediction_prize"
     t.index ["first_team_id"], name: "index_games_on_first_team_id"
   end
 
