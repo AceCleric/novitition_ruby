@@ -5,9 +5,10 @@
   <div class="row top-buffer pb-5">
     <div class="col d-flex justify-content-center">
       <div class="container">
-        <%= render "games/table", games: @todays_games, title: "Todays games" %>
+        <%= render "games/table", games: @todays_games, title: "Todays games", show_competition: true %>
         <div class="col-md-12 text-center pt-3">
-          <button type="button" class="btn btn-secondary">Make a prediction!</button>
+          <h5>For making a prediction go to Games!</h5>
+          <%= link_to 'Games', games_path, class: "btn btn-secondary", data: { turbolinks: false } %>
         </div>
       </div>
     </div>
@@ -17,22 +18,16 @@
 <div class="basketball_field_image">
   <h1 class="text-center pt-3">Current data</h1>
   <div class="row top-buffer pb-5">
-    <div class="col-sm-4 col-xs-4 d-flex justify-content-center">
+    <div class="col-sm-6 col-xs-6 d-flex justify-content-center">
       <div class="container">
-        <h5>Games</h5>
-        <%= render "games/table", games: @upcoming_games, title: "Upcoming games" %>
-      </div>
-    </div>
-    <div class="col-sm-4 col-xs-3 d-flex justify-content-center">
-      <div class="container">
-        <h5>Competitions</h5>
+        <h5 class="text-center">Competitions</h5>
         <%= render "competitions/table", competitions: @competitions %>
       </div>
     </div>
-    <div class="col-sm-4 col-xs-3 d-flex justify-content-center">
+    <div class="col-sm-6 col-xs-6 d-flex justify-content-center">
       <div class="container">
-        <h5>Teams</h5>
-        <%= render "teams/table", teams: @teams %>
+        <h5 class="text-center">Teams</h5>
+        <%= render "teams/table", teams: @teams, disable_competitions: false %>
       </div>
     </div>
   </div>

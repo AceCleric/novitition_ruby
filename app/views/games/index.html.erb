@@ -5,10 +5,7 @@
   <div class="row top-buffer pb-5">
     <div class="col d-flex justify-content-center">
       <div class="container">
-        <%= render "games/table", games: @todays_games, title: "Todays games" %>
-        <div class="col-md-12 text-center pt-3">
-          <button type="button" class="btn btn-secondary">Make a prediction</button>
-        </div>
+        <%= render "games/table", games: @todays_games, title: "Todays games", show_competition: true %>
       </div>
     </div>
   </div>
@@ -16,7 +13,7 @@
   <div class="row top-buffer pb-5">
     <div class="col d-flex justify-content-center">
       <div class="container">
-        <%= render "games/table", games: @past_games, title: "Past games" %>
+        <%= render "games/table", games: @upcoming_games, title: "Upcoming games", show_competition: true %>
       </div>
     </div>
   </div>
@@ -24,7 +21,7 @@
   <div class="row top-buffer pb-5">
     <div class="col d-flex justify-content-center">
       <div class="container">
-        <%= render "games/table", games: @upcoming_games, title: "Upcoming games" %>
+        <%= render "games/table", games: @past_games, title: "Past games", show_competition: true %>
       </div>
     </div>
   </div>

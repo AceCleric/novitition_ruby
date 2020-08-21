@@ -1,14 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div class="soccer_field_image">
+  <h1 class="text-center pt-3">Competition: <%= @competition.name %></h1>
+  <div class="row top-buffer text-center">
+    <div style="margin-left: auto; margin-right: auto;">
+      <div class="card bg-dark border-success mb-4" style="width: 23rem;">
+        <%= image_tag "hockey_player.jpeg", class: "card-img-top", alt: "hockey player" %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @competition.name %></h5>
+          <p class="card-text"><%= @competition.sport.name %></p>
+          <p class="card-text"><%= @competition.nationality %></p>
+          
+          <%= link_to 'Edit', edit_competition_path(@competition), class: "btn btn-warning" %> |
+          <%= link_to 'Back', competitions_path, class: "btn btn-warning", data: { turbolinks: false } %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @competition.name %>
-</p>
+</div>
 
-<p>
-  <strong>Sport:</strong>
-  <%= @competition.sport.name %>
-</p>
+<div class="tennis_field_image">
+  <h1 class="text-center pt-3">Competition TEAMS</h1>
+  <div class="row top-buffer pb-5">
+    <div class="col d-flex justify-content-center">
+      <div class="container">
+        <%= render "teams/table", teams: @competition.teams, disable_competitions: true %>
+        <div class="col-md-12 text-center pt-3">
+          <%= link_to 'Add a team', new_competition_team_path(@competition), class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_competition_path(@competition) %> |
-<%= link_to 'Back', competitions_path %>
+<div class="basketball_field_image">
+  <h1 class="text-center pt-3">Competition GAMES</h1>
+  <div class="row top-buffer pb-5">
+    <div class="col d-flex justify-content-center">
+      <div class="container">
+        <%= render "games/table", games: @competition.games, title: "Competitions games", show_competition: false %>
+        <div class="col-md-12 text-center pt-3">
+          <%= link_to 'Add a game', new_competition_game_path(@competition.id), class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

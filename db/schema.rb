@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_212713) do
+ActiveRecord::Schema.define(version: 2020_08_20_214840) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "namespace"
@@ -59,12 +59,13 @@ ActiveRecord::Schema.define(version: 2020_08_19_212713) do
     t.string "second_team_id"
     t.date "match_date"
     t.string "location"
-    t.integer "score_first_team"
-    t.integer "score_second_team"
+    t.integer "score_first_team", default: 0
+    t.integer "score_second_team", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_team_id"
-    t.float "prediction_prize"
+    t.float "prediction_prize", default: 0.0
+    t.string "competition_id"
     t.index ["first_team_id"], name: "index_games_on_first_team_id"
   end
 
@@ -72,10 +73,11 @@ ActiveRecord::Schema.define(version: 2020_08_19_212713) do
     t.string "team_id"
     t.boolean "will_win"
     t.string "user_id"
-    t.integer "points"
+    t.integer "points", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "game_id"
+    t.boolean "synced", default: false
   end
 
   create_table "sports", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -108,10 +110,10 @@ ActiveRecord::Schema.define(version: 2020_08_19_212713) do
   end
 
   create_table "wallets", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.float "credit"
+    t.float "credit", default: 20.0
     t.string "user_id"
-    t.float "add_credit"
-    t.float "remove_credit"
+    t.float "add_credit", default: 0.0
+    t.float "remove_credit", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

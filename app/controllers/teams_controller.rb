@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_competition
   before_action :check_user_login
 
   def index
@@ -21,10 +22,10 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to team_path(@team.id), notice: 'Team aangemaakt.' }
-        format.json { render :show, status: :created, location: @sport }
+        format.html { redirect_to competition_path(@competition.id), notice: "Team #{@team.name} aangemaakt." }
+        format.json { render :show, status: :created, location: @team }
       else
-        format.html { render :new }
+        format.html { redirect_to new_competition_team_path(@competition.id), notice: "Failed creating a team"  }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -33,11 +34,11 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to team_path(@team.id), notice: 'Team bewerkt.' }
-        format.json { render :show, status: :ok, location: @team }
+        format.html { redirect_to competition_path(@competition.id), notice: "Team #{@team.name} aangemaakt." }
+        format.json { render :show, status: :created, location: @team }
       else
-        format.html { render :edit }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.html { redirect_to edit_competition_team_path(@competition.id), notice: "Failed creating a team"  }
+        format.json { render json: @team.errors, status: :unprocessable_entity } 
       end
     end
   end
@@ -51,6 +52,10 @@ class TeamsController < ApplicationController
   end
 
   private
+
+  def set_competition
+    @competition = Competition.find(params[:competition_id])
+  end
 
   def set_team
     @team = Team.find(params[:id])

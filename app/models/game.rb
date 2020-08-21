@@ -3,6 +3,7 @@ class Game < ApplicationRecord
 
   belongs_to :first_team, class_name: "Team"
   belongs_to :second_team, class_name: "Team"
+  belongs_to :competition
 
   has_many :predictions
 
@@ -11,14 +12,18 @@ class Game < ApplicationRecord
   scope :upcoming, -> { where("games.match_date >=  ?", Time.zone.now ) }
 
   def result
-    return unless match_date < Time.zone.now && score_first_team.present? && score_second_team.present?
+    return if Time.zone.now < match_date
 
     if score_first_team > score_second_team
       return first_team
     elsif score_second_team > score_first_team
       return second_team
     else
-      return {result: "draw"}
+      return "draw"
     end
+  end
+
+  def has_not_started?
+    match_date > Time.zone.now
   end
 end

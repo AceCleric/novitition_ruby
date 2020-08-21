@@ -33,6 +33,7 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'activeadmin'
+gem 'whenever', require: false
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

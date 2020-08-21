@@ -1,23 +1,17 @@
 class PredictionsController < ApplicationController
   before_action :set_prediction, only: %i[show edit update destroy]
-  before_action :set_game
+  before_action :set_user
+  before_action :set_game_data, only: %i[new edit]
   before_action :check_user_login
 
   def index
-    @only_show_user_predictions = show_user_predictions?
-    
-    if @only_show_user_predictions
-      @predictions = current_user.predictions
-
-      # getting the predictions which have won
-      won_predictions_with_nil = @predictions.map(&:passed?)
-      @won_predictions = won_predictions_with_nil.compact
-      
-      # remove nil items from array
-      @lost_predications = @predictions - @won_predictions
-    else
-      @predictions = Prediction.all
-    end
+    @predictions = current_user.predictions
+    # getting the predictions which have won
+    @won_predictions = @predictions.map(&:passed?).compact
+    @pending_predictions = @predictions.map(&:pending?).compact
+     
+    # All predictions minus the not yet made and won predictions result in the lost predictions
+    @lost_predications = @predictions -  @won_predictions -  @pending_predictions
   end
 
   def show
@@ -25,7 +19,6 @@ class PredictionsController < ApplicationController
 
   def new
     @prediction = Prediction.new
-    @disable_score_fields = true 
   end
 
   def edit
@@ -36,10 +29,10 @@ class PredictionsController < ApplicationController
 
     respond_to do |format|
       if @prediction.save
-        format.html { redirect_to game_predictions_path(@game), notice: 'Prediction aangemaakt.' }
-        format.json { render :show, status: :created, location: @sport }
+        format.html { redirect_to user_predictions_path(@user.id), notice: 'Added a prediction.' }
+        format.json { render :show, status: :created, location: @prediction }
       else
-        format.html { render :new }
+        format.html { redirect_to new_user_prediction_path(current_user.id), notice: "Failed creating prediction." }
         format.json { render json: @prediction.errors, status: :unprocessable_entity }
       end
     end
@@ -48,10 +41,10 @@ class PredictionsController < ApplicationController
   def update
     respond_to do |format|
       if @prediction.update(prediction_params)
-        format.html { redirect_to game_predictions_path(@game), notice: 'Prediction bewerkt.' }
-        format.json { render :show, status: :ok, location: @prediction }
+        format.html { redirect_to user_predictions_path(@user.id), notice: 'Updated prediction.' }
+        format.json { render :show, status: :created, location: @prediction }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_user_prediction_path(current_user.id), notice: "Failed updating prediction."}
         format.json { render json: @prediction.errors, status: :unprocessable_entity }
       end
     end
@@ -65,16 +58,24 @@ class PredictionsController < ApplicationController
     end
   end
 
+  def sync_predictions
+    SyncPredictionsJob.new.sync
+    redirect_to user_predictions_path(@current_user.id)
+  end
+
   private
+
+  def set_game_data
+    @game = Game.find(params[:game_id])
+    @playing_teams = [@game.first_team, @game.second_team]
+  end
 
   def set_prediction
     @prediction = Prediction.find(params[:id])
   end
 
-  def set_game
-    return if show_user_predictions?
-    @game = Game.find(params[:game_id])
-    @playing_teams = [@game.first_team, @game.second_team]
+  def set_user
+    @user = User.find(params[:user_id])
   end
 
   def set_predictions

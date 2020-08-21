@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
-  ActiveAdmin.routes(self)
   root 'dashboard#index'
 
   resources :wallets
@@ -9,16 +7,20 @@ Rails.application.routes.draw do
     resources :predictions
   end
 
-  resources :user do
+  resources :users do
     resources :predictions
   end
 
-  resources :teams
-  resources :competitions
+  resources :competitions do
+    resources :games
+    resources :teams
+  end
+  
   resources :sports
   resources :users
   get 'profile/:id', to: 'users#show', as: 'profile'
-  patch 'profile/:id', to: 'user#update'
+  patch 'profile/:id', to: 'users#update'
+  get 'sync_predictions', to: 'predictions#sync_predictions'
 
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'

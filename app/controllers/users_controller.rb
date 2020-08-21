@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(users_params)
 
     respond_to do |format|
       if @user.save
@@ -65,10 +65,13 @@ class UsersController < ApplicationController
   def set_users
     @users = parent.user
   end
-  
  
-  def user_params
+  def users_params
     params.require(:users).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 end
 

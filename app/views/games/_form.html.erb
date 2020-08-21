@@ -1,36 +1,52 @@
-<%= simple_form_for(@game) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for([@competition, @game]) do |f| %>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.association :first_team, collection: Team.all.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.association :first_team, collection: @competition.teams.map{ |team| [team.name, team.id, {name: team.name.downcase}] }, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.association :second_team, collection: Team.all.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.association :second_team, collection: @competition.teams.map{ |team| [team.name, team.id, {name: team.name.downcase}] }, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :match_date %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :match_date, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :location %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :location, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :score_first_team, disabled: @disable_score_fields %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :score_first_team, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :score_second_team, disabled: @disable_score_fields %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :score_second_team, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :prediction_prize %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :prediction_prize, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <%= f.input :competition_id, as: :hidden, input_html: { value: @competition.id } %>
+
+  <div class="form-group row">
+    <div class="col-lg-9 text-center">
+     <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

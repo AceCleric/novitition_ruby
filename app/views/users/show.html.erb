@@ -7,7 +7,7 @@
         <h1><%= current_user.name %></h1>
       </div>
       <div class="card-body">
-        <%= simple_form_for current_user, url: profile_path(current_user.id), html: {id: "login-form", class: "form"} do |f| %>
+        <%= simple_form_for current_user do |f| %>
           <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">First name</label>
             <div class="col-lg-9">
@@ -51,14 +51,22 @@
     <div class="card bg-dark col-lg-7 order-lg-2 mb-4 mt-4 no-float">
       <div class="card-header">
         <h1>Your wallet</h1>
-        <h3>Current credit: <%= current_user.wallet.credit %> </h3>
+        <h3>Current credit: <%= current_user.wallet.credit %></h3>
+
+        <h6>You are only allowed to take 5 novipoints</h6>
       </div>
       <div class="card-body">
-        <%= simple_form_for current_user.wallet do |f| %>
+        <%= simple_form_for(current_user.wallet) do |f| %>
           <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Add credit</label>
             <div class="col-lg-9">
-              <%= f.number_field :add_credit, class: "form-control" %> 
+              <%= f.select :add_credit, ((1..5).map {|i| [i,i] }),  {}, {class: "form-control"} %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label"></label>
+            <div class="col-lg-9">
+              <%= f.submit "Update", class: "btn btn-primary"  %> 
             </div>
           </div>
         <% end %>
@@ -71,7 +79,7 @@
       </div>
       <div class="card-body">
         <div class="container">
-          <%= render "predictions/table", predictions: current_user.predictions %>
+          <%= render "predictions/table", predictions: current_user.predictions, title: "Predictions" %>
       </div>
     </div>
   </div>

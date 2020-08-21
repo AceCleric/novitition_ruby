@@ -1,23 +1,29 @@
-<%= simple_form_for([@game, @prediction]) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for([@user, @prediction]) do |f| %>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.association :team, collection: @playing_teams.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.association :team, collection: @playing_teams.map{ |team| [team.name, team.id, {name: team.name.downcase}] } %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :will_win %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :will_win %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :points %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :points %>
+    </div>
   </div>
 
-  <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+  <%= f.input :user_id, as: :hidden, input_html: { value: @user.id } %>
   <%= f.input :game_id, as: :hidden, input_html: { value: @game.id } %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group row">
+    <div class="col-lg-9 text-center" >
+     <%= f.button :submit, class: "btn btn-primary text-center" %>
+    </div>
   </div>
 <% end %>

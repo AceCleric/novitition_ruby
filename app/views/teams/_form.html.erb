@@ -1,20 +1,22 @@
-<%= simple_form_for(@team) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for([@competition, @team]) do |f| %>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.association :competition, collection: Competition.all.map{ |competition| [competition.name, competition.id, {name: competition.name.downcase}] } %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :name, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :name %>
+  <div class="form-group row">
+    <div class="col-lg-9">
+      <%= f.input :country, as: :string, class: "form-control"%>
+    </div>
   </div>
 
-  <div class="form-inputs" style="margin-left: 2em;">
-    <%= f.input :country, as: :string %>
-  </div>
+  <%= f.input :competition_id, as: :hidden, input_html: { value: @competition.id } %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group row">
+    <div class="col-lg-9 text-center">
+     <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

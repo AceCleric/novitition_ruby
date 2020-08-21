@@ -1,5 +1,25 @@
-<h1>New Game</h1>
+<% tab "competitions" %>
 
-<%= render 'form', game: @game %>
-
-<%= link_to 'Back', games_path %>
+<div class="tennis_field_image">
+  <div  class="row justify-content-center align-items-center h-50">
+    <div class="card bg-dark col-lg-7 order-lg-2 mb-4 mt-4 no-float">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= link_to 'Back', competition_path(@competition.id), class: "btn btn-warning", data: { turbolinks: false } %>
+          </div>
+          <div class="col-md-8">
+            <h1>Add a new Game</h1>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <div class="col-sm-12 col-sm offset-1">
+            <%= render 'form' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

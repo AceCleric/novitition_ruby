@@ -1,5 +1,59 @@
-<h1>New Prediction</h1>
+<div class="basketball_field_image">
+  <div  class="row justify-content-center align-items-center h-50">
+    <div class="card bg-dark col-lg-7 order-lg-2 mb-4 mt-4 no-float">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= link_to 'Back', user_predictions_path(current_user), class: "btn btn-warning", data: { turbolinks: false } %>
+          </div>
+          <div class="col-md-8">
+            <h1>Add a new prediction</h1>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <div class="col-sm-12 col-sm offset-1">
+            <%= render 'form', prediction: @prediction %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render 'form', prediction: @prediction %>
-
-<%= link_to 'Back', game_predictions_path(@game) %>
+<div class="soccer_field_image">
+  <h1 class="text-center pt-3">Top articles</h1>
+  <div class="row top-buffer text-center">
+    <div class="col-sm-4 col-xs-4 d-flex justify-content-center">
+      <div class="card bg-dark border-success mb-4" style="width: 23rem;">
+        <%= image_tag "soccer_player.jpg", class: "card-img-top", alt: "soccer player" %>
+        <div class="card-body">
+          <h5 class="card-title">Top soccer article</h5>
+          <p class="card-text">UEFA might have (accidentally) landed on the perfect model for its second-tier championship,...</p>
+          <a href="https://www.nytimes.com/2020/08/15/sports/soccer/europa-league.html" class="btn btn-warning">Read more...</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-3 d-flex justify-content-center">
+      <div class="card bg-dark border-success mb-4" style="width: 23rem;">
+        <%= image_tag "basketball_player.jpg", class: "card-img-top", alt: "basketball player" %>
+        <div class="card-body">
+          <h5 class="card-title">Top basketball article</h5>
+          <p class="card-text">The game is a place of progressive ideas, leadership, diversity and hope...</p>
+          <a href="https://www.nytimes.com/2020/08/15/sports/soccer/europa-league.html" class="btn btn-warning">Read more...</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-3 d-flex justify-content-center">
+      <div class="card bg-dark border-success mb-4" style="width: 23rem;">
+        <%= image_tag "hockey_player.jpeg", class: "card-img-top", alt: "hockey player" %>
+        <div class="card-body">
+          <h5 class="card-title">Top hockey article </h5>
+          <p class="card-text">N.H.L. teams’ raucous home arena traditions have persisted, with tweaks, in the postseason hub cities...        </p>
+          <a href="#" class="btn btn-warning">Read more...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

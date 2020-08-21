@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
+  before_action :set_competition, except: %i[index]
   before_action :check_user_login
 
   def index
@@ -24,11 +25,11 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to game_path(@game.id), notice: 'Game aangemaakt.' }
-        format.json { render :show, status: :created, location: @sport }
+        format.html { redirect_to competition_path(@competition.id), notice: "Game #{@game.first_team.name} vs #{@game.second_team.name} aangemaakt." }
+        format.json { render :show, status: :created, location: @competition }
       else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.html { redirect_to edit_competition_game_path(@competition.id, @game), notice: "Failed creating a game"  }
+        format.json { render json: @competition.errors, status: :unprocessable_entity } 
       end
     end
   end
@@ -36,11 +37,11 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to game_path(@game.id), notice: 'Game bewerkt.' }
-        format.json { render :show, status: :ok, location: @game }
+        format.html { redirect_to competition_path(@competition.id), notice: "Game #{@game.first_team.name} vs #{@game.second_team.name} updated." }
+        format.json { render :show, status: :created, location: @competition }
       else
-        format.html { render :edit }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.html { redirect_to edit_competition_game_path(@competition.id, @game), notice: "Failed updating a game"  }
+        format.json { render json: @competition.errors, status: :unprocessable_entity } 
       end
     end
   end
@@ -55,6 +56,10 @@ class GamesController < ApplicationController
 
   private
 
+  def set_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
   def set_game
     @game = Game.find(params[:id])
   end
@@ -64,7 +69,7 @@ class GamesController < ApplicationController
   end
   
   def game_params
-    params.require(:game).permit(:first_team_id, :second_team_id, :match_date, :location, :score_first_team, :score_second_team, :prediction_prize)
+    params.require(:game).permit(:first_team_id, :second_team_id, :match_date, :location, :score_first_team, :score_second_team, :prediction_prize, :competition_id)
   end
 end
 
