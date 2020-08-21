@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 user = User.create(first_name: "test", last_name: "person", email: "testperson1@email.com", password: "test", password_confirmation: "test")
 Wallet.create(credit: 20, user_id: user.id)
@@ -35,4 +27,24 @@ Game.create(
   prediction_prize: 1,
   competition_id: Competition.find_by(name: "NBA tryouts").id,
   location: "Amsterdam"
+)
+
+game = Game.create(
+  first_team_id: Team.find_by(name: "Juventus").id, 
+  second_team_id: Team.find_by(name: "Miami Heat").id,
+  match_date: Time.zone.now + 1.days,
+  score_first_team: 0,
+  score_second_team: 0,
+  prediction_prize: 1,
+  competition_id: Competition.find_by(name: "NBA tryouts").id,
+  location: "Amsterdam"
+)
+
+Prediction.create(
+  team_id: Team.find_by(name: "Juventus").id,
+  will_win: true,
+  user_id: user.id,
+  points: 2,
+  game_id: game.id,
+  synced: false
 )
