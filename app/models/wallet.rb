@@ -14,7 +14,7 @@ class Wallet < ApplicationRecord
     else
       removed_credit = credit - remove_credit
       return "No can't do" if removed_credit < 0
-      wallet.update_columns(wallet_credit: removed_credit, remove_credit: 0)
+      wallet.update_columns(credit: removed_credit, remove_credit: 0)
     end
   end
 end

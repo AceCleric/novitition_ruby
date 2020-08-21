@@ -26,4 +26,8 @@ class Game < ApplicationRecord
   def has_not_started?
     match_date > Time.zone.now
   end
+
+  def today?
+    match_date == Date.today
+  end
 end

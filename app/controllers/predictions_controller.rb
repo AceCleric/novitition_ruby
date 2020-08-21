@@ -29,6 +29,7 @@ class PredictionsController < ApplicationController
 
     respond_to do |format|
       if @prediction.save
+        @prediction.user.wallet.update(remove_credit: @prediction.points)
         format.html { redirect_to user_predictions_path(@user.id), notice: 'Added a prediction.' }
         format.json { render :show, status: :created, location: @prediction }
       else

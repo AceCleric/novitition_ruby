@@ -20,7 +20,7 @@
         <td><%= competition.sport.name %></td>
         <td><%= competition.nationality %></td>
         <td class="text-center">
-          <%= link_to "Show", competition_path(competition.id), data: { turbolinks: false } %>          
+          <%= link_to "Show", competition_path(competition.id), data: { turbolinks: false }, class: "btn btn-secondary" %>          
         </td>
       </tr>
     <% end %>

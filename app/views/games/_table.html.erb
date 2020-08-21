@@ -38,9 +38,10 @@
         <% if show_competition %>
           <td><%= game.competition.name %></td>
        <% end %> 
-        <% if game.has_not_started? %>
+        <% if game.has_not_started? || game.today? %>
           <td class="text-center">
-            <%= link_to "New prediction", new_user_prediction_path(current_user.id, game_id: game.id), data: { turbolinks: false } %>          
+            <%= link_to "New prediction", new_user_prediction_path(current_user.id, game_id: game.id), data: { turbolinks: false }, class: "btn btn-secondary" %> |          
+            <%= link_to "Mock result", mock_game_result_path(competition_id: game.competition_id, id: game.id), data: { turbolinks: false }, class: "btn btn-secondary" %>          
           </td>
         <% end %>
       </tr>
